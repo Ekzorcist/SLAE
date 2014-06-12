@@ -1,3 +1,13 @@
+// Linux/x86/shell_bind_tcp shellcode analysis
+// msfpayload linux/x86/shell_bind_tcp LPORT=5555 C
+// Filename: checker3.c
+// Author: Oleg Boytsev
+// License http://creativecommons.org/licenses/by-sa/3.0/
+// Legitimate use and research only
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 #include<stdio.h>
 #include<string.h>
 

