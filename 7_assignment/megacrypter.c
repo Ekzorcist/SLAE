@@ -1,3 +1,12 @@
+// AES128 shellcode crypter
+// Filename: megacrypter.c
+// Author: Oleg Boytsev
+// License http://creativecommons.org/licenses/by-sa/3.0/
+// Legitimate use and research only
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
