@@ -1,3 +1,12 @@
+; Mutated jmp_call_pop_execve shellcode. Original is http://shell-storm.org/shellcode/files/shellcode-863.php
+; Filename: jmp_call_pop_execve.nasm
+; Author: Oleg Boytsev
+; License http://creativecommons.org/licenses/by-sa/3.0/
+; Legitimate use and research only
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 global _start
 section .text
 _start:
@@ -19,4 +28,4 @@ south:
 
 north:
         call south		;Call initiates storing the next command address into stack, so that we store address of /bin/ksh string 
-        string db "/bin/ksh"    ;here we use a part of ksh
+        string db "/bin/ksh"    ;here we use ksh
